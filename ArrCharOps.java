@@ -132,12 +132,14 @@ public class ArrCharOps {
      * characters containing the characters "urge".
      */
     public static char[] subArray(char[] arr, int beginIndex, int endIndex) {
-        int len = endIndex - beginIndex;
-        char[] res = new char[len];
-        for (int i = beginIndex; i < len; i++) {
-            res[i] = arr[i];
+        if (endIndex > arr.length || beginIndex<0 ){
+            return null;
         }
-        return res;
+        char[] arrnew = new char[endIndex-beginIndex];
+        for (int i = 0 ; i < arrnew.length ; i++){
+            arrnew[i] = charAt(arr, i+beginIndex);
+        }
+        return arrnew;
     }
 
     /**
@@ -193,15 +195,26 @@ public class ArrCharOps {
      *         return -2 if there is an error with the input.
      */
     public static int compareTo(String str1, String str2) {
-        int limit = Math.min(str1.length(), str2.length());
-        for (int i = 0; i < limit; i++) {
-            char c1 = str1.charAt(i);
-            char c2 = str2.charAt(i);
-            if (c1 != c2) {
-                return c1 - c2;
-            }
+        if (str1 == null || str2 == null || str1.length()==0 || str2.length()==0){
+            return -2;
         }
-        return str1.length() - str2.length();
-
+        int shortLength = Math.min(str1.length(), str2.length());
+        int shortString = 0;
+        if (str1.length()<str2.length()) {
+            shortString = -1;
+        } else if (str1.length()>str2.length()){ 
+            shortString = 1;
+        }
+        for (int i=0 ; i<shortLength; i++){
+            if (str1.charAt(i) < str2.charAt(i)){
+                return -1;
+            } else if (str1.charAt(i) > str2.charAt(i)){
+                return 1;
+            } 
+        }
+        if (str1.length()!=str2.length()){
+            return shortString;
+        }
+        return 0;
     }
 }
