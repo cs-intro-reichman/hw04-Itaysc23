@@ -33,23 +33,25 @@ public class MyString {
 
     /** If str1 contains str2, returns true; otherwise returns false. */
     public static boolean contains(String str1, String str2) {
-        if (str1.length() == 0 || str2.length()>str1.length()){ //if str1 is empty or str2>str1
-            return false;
-        } else if (str2.length() == 0){ //if str2 empty
-            return true;
-        }
-        for (int i = 0 ; i<=str1.length()-str2.length() ; i++){ //loop over str1 until there isnt space for str2
-            Boolean match = true;
-            for (int j =0 ; j<str2.length() ; j++){ // loop over str2
-                if (str1.charAt(i+j) != str2.charAt(j)){ //checks for mismatch. if non, will stay true
-                    match = false;
-                    break; //exit inner loop 
-                }
-            }
-            if (match){
-                return true;
-            }
-        }
+        if (str2.length() == 0) {
+        return true;
+    }
+    if (str1.length() == 0 || str2.length() > str1.length()) {
         return false;
     }
+
+    for (int i = 0; i <= str1.length() - str2.length(); i++) {
+        boolean match = true;
+        for (int j = 0; j < str2.length(); j++) {
+            if (str1.charAt(i + j) != str2.charAt(j)) {
+                match = false;
+                break;
+            }
+        }
+        if (match) {
+            return true;
+        }
+    }
+    return false;
+}
 }
